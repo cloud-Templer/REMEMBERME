@@ -49,14 +49,14 @@ color:red;
 </style>
 </head>
 <body style="background-color: #e9ecef;">
-<jsp:forward page="../common/menubar.jsp"></jsp:forward>
+<jsp:include page="../common/menubar.jsp"/>
 
 <div class="loginArea" id="login" style="height: 580px;">
 
 <form method="get" action="<%=request.getContextPath()%>/login.me"
 			onsubmit="return validate();" >
 			<br> <br> <br> <br> <br>
-			<h1 align="center" style="color:#cc0000;">로그인</h1>
+			<h1 align="center" style="color:#cc0000;">login</h1>
 			<br> <br>
 			<table class="inputinfo">
 				<tr>
@@ -74,7 +74,7 @@ color:red;
 			</table>
 			<br>
 			<div class="btns" align="center" >
-				<div id="memberJoinBtn" onclick="memberJoin();">
+				<div id="memberJoinBtn" >
 					<span style="">회원가입</span>
 				</div>
 				<div id="LoginBtn" style="display: inline-block;">
@@ -88,7 +88,30 @@ color:red;
 
 		</form>
 		</div>
+	<script>
+		/*로그인 입력 안했을 시 => alter창 또는 팝업창 띄운 후, error 페이지로 연결*/
+		function validate() {
+			if ($("#userId").val().trim().length == 0) {
+				alert("아이디를 입력하세요");
+				$("#userId").focus();
+				return false;
+			}
+			//비밀번호를 입력하지 않았을 때
+			if ($("#userPwd").val().trim().length == 0) {
+				alert("비밀번호를 입력하세요");
+				$("#userPwd").focus();
 
+				return false;
+			}
+			return true;
+		}
+		$(function(){
+		 	$("#memberJoinBtn").click(function(){
+				location.href="${contextPath }/views/member/signUp.jsp";
+			})
+		})
+		
+	</script>
 
 
 
@@ -118,6 +141,6 @@ color:red;
 			return true;
 		}
 	</script>
-
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
