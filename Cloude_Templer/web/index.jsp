@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ tablib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
- 에욱 에우욱!!에욱 한번더
+  <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
+  
+  
 </body>
 </html>
