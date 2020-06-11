@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace="memberMapper"/>]
+<mapper namespace="memberMapper">
+ 
+ <resultMap type="Member" id="memberResultSet">
+ 
+ 	<id property="userId" column="USER_ID"/>
+ 	
+ 		<result property="grade" column="GRADE"/>
+ 		<result property="userName" column="USER_NAME"/>
+ 		<result property="userPwd" column="USER_PWD"/>
+ 		<result property="email" column="EMAIL"/>
+ 		<result property="phone" column="PHONE"/>
+ 		<result property="address" column="ADDRESS"/>
+ 		<result property="nickname" column="ICKNAME"/>
+ 		<result property="accountGrade" column="ACCOUNT_GRADE"/>
+ 		<result property="point" column="POINT"/>
+ 		<result property="enrollDate" column="ENROLL_DATE"/>
+ 		<result property="deleteYN" column="DELETE_YN"/>
+ 		<result property="deleteDate" column="DELETE_DATE"/>
+ 		<result property="cash" column="CASH"/>
+
+ </resultMap>
+ 
+ <select id="idCheck" parameterType="string" resultMap="memberResultSet">
+ 	SELECT *
+ 	FROM MEMBER
+ 	WHERE USER_ID=#{userId}
+ </select>
+ 
+ <insert id="insertMember" parameterType="Member">
+ 	INSERT INTO MEMBER
+ 	VALUES(#{userId}
+ 			,DEFAULT
+ 			,#{userName}
+ 			,#{userPwd}
+ 			,#{email}
+ 			,#{phone}
+ 			,#{address}
+ 			,#{nickname}
+ 			,DEFAULT
+ 			,DEFAULT
+ 			,SYSDATE
+ 			,DEFAULT
+ 			,SYSDATE
+ 			,DEFAULT)
+ 	
+ </insert>
 </mapper>

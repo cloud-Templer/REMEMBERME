@@ -8,25 +8,29 @@
 	<!-- null데이터면 null로 인식하게하는부분 -->
 	<setting name="jdbcTypeForNull" value="NULL"/>
 </settings>
+
 <typeAliases>
 <!-- 객체 추가부분 -->
- <typeAlias type="member.model.vo.Member" alias="Member"/>
+   <typeAlias type="member.model.vo.Member" alias="Member"/>
 </typeAliases>
 
 <!-- db연결 -->
-<environments default="devleopment">
+<environments default="development">
 
 	<environment id="development">
-		<transactionManager type="JDBC"></transactionManager>
-		<dataSource type="POOLED">
+		 <transactionManager type="JDBC"></transactionManager>
+		   <dataSource type="POOLED">
 			
-			<property name="drivver" value="${driver}"/>
-			<property name="url" value="${url}"/>
-			<property name="username" value="${username}"/>
-			<property name="password" value="${password}"/>
+		<property name="driver" value="${driver}"/>
+         <property name="url" value="${url}"/>
+         <property name="username" value="${username}"/>
+         <property name="password" value="${password}"/>
 		
 		</dataSource>
 	</environment>
 </environments>
+<mappers>
+	<mapper resource="/mappers/member-mapper.xml"/>
+</mappers>
 
 </configuration>

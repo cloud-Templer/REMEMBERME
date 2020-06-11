@@ -35,12 +35,12 @@ public class idCheckServlet extends HttpServlet {
 		System.out.println("servlet으로 아이디값 넘어오는지 확인 : "+userId);
 		
 		Member m = new MemberServiceImpl().idCheck(userId);
-		
+		System.out.println("servlet 에서의 m : " + m);
 		PrintWriter out = response.getWriter();
-		if(!(m == null) ) {
-			out.append("fail");
+		if(m == null || !userId.equals(m.getUserId())) {
+			out.append("success"); 
 		}else {
-			out.append("success");
+			out.append("fail");
 		}
 		out.flush();
 		out.close();
