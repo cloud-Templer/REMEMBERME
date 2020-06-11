@@ -72,15 +72,13 @@ td {
 					<br>
 
 					<div class="info-box2">
-						<label class="labelfirst">아이디<a
-							style="color: red; font-size: 15px;">*</a></label><input
-							class="nomal-text" type="text" id="userId" name="userId" required>
+						<label class="labelfirst">아이디<a style="color: red; font-size: 15px;">*</a></label>
+						<input class="nomal-text" type="text" id="userId" name="userId" required>
 					</div>
 					<div id="idresult" style="font-size: 13px; float: right;">영어,숫자
 						상관없이 4글자이상 입력하세요.</div>
 					<br> <br>
-					<div id="idCheck"
-						style="float: right; width: 100px; height: 20px; background-color: gray; text-align: center; color: white;">중복확인</div>
+					<div id="idCheck" style="float: right; width: 100px; height: 20px; background-color: gray; text-align: center; color: white;">중복확인</div>
 					<br> <br>
 
 					<div class="info-box3">
@@ -151,7 +149,6 @@ td {
 				<br> <br>
 				<div class="submit-box" align="center">
 					<div id="goMain" onclick="goMain();">메인으로</div>
-					<!-- <div id="joinBtn" onclick="insertMember();"></div> -->
 					<input type="button" value="가입하기"
 						style="width: 280px; height: 30px; color: white; background: #cc0000"
 						onclick="checkId()">
@@ -166,14 +163,57 @@ td {
 	<!-- container 끝-->
 	
 	<script>
-	function checkId(){
-		if($("#userName").val()==""){	//이름 적지않으면.
-			alert("이름을 기재해주세요.")
-		}else if($("#userId").val()==""){
-			alert("아이디를 기재해주세요.")
-		}else if($("#userPwd").val().length>=6 && $(""))
-		
+	function goMain(){
+		location.href="${contextPath}/index.jsp";
 	}
+	function insertMember(){
+		      //아이디 중복 확인
+		       if($("#checkTest").val() != "0"){
+		         return true;
+		      }else{
+		         alert("중복확인 버튼을 체크해 주세요");
+		         return false;
+		      }
+		   }
+	
+	   $(function(){
+	          $("#userId").change(function(){
+	             $("#checkTest").val(0);
+	             $("#idCheck").css("background-color","gray");
+	          });
+	     
+	          $("#idCheck").click(function(){
+	             $("#checkTest").val(1);
+	             var userId = $("#userId").val();
+	              alert(userId);
+	             if(!userId || userId.length < 4){
+	                alert("아이디는 최소 4자리 이상이어야합니다.");
+	                userId.focus();
+	             }else{
+	                $.ajax({
+	                   url: "${contextPath}/idCheck.me",
+	                  type : "post",
+	                  data : {userId:userId},
+	                  success : function(data) {
+	                	  if (data == 'fail') {
+		                        alert("아이디가 중복 됩니다.");
+		                        userId.focus();
+		                     } else {
+		                        alert("아이디가 사용가능합니다.");
+		                        idCheck = 1;
+		                        $("#idCheck").css("background-color","red");   //색을 빨간색으로 바꿔줌
+		                     }
+		                    
+	                  },
+	                  error : function(data) {
+	                     console.log("서버 통신 안됨");
+	                  }
+
+	               })
+	            }
+	         })
+
+	      });// ajax 중복
 	</script>
 	
 

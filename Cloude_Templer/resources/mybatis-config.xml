@@ -10,6 +10,7 @@
 </settings>
 <typeAliases>
 <!-- 객체 추가부분 -->
+ <typeAlias type="member.model.vo.Member" alias="Member"/>
 </typeAliases>
 
 <!-- db연결 -->
